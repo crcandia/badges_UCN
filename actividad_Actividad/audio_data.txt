@@ -1,0 +1,1 @@
+{"data": {"member": "C1:7C:3B:1A:29:17", "badge_address": "C1:7C:3B:1A:29:17", "voltage": 2.957, "samples": [29], "num_samples": 1, "timestamp": 1554237565.738, "member_id": 633, "sample_period": 50}, "log_timestamp": 1554237565.914, "type": "audio received", "log_index": -1}
