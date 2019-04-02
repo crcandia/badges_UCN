@@ -22,8 +22,22 @@ do
 		numero=false
 	fi		
 done
+
+#Backup
+if [ ! -d "/home/pirate/backup/actividad_UCN_$(date +'%d_%m_%Y')" ];
+	then
+		mkdir "/home/pirate/backup/actividad_UCN_$(date +'%d_%m_%Y')"
+		cp "/home/pirate/badges_UCN/openbadge-hub-py/data/audio_data.txt" "/home/pirate/backup/actividad_UCN_$(date +'%d_%m_%Y')/audio_data.txt"
+		cp "/home/pirate/badges_UCN/openbadge-hub-py/data/proximity_data.txt" "/home/pirate/backup/actividad_UCN_$(date +'%d_%m_%Y')/proximity_data.txt"
+		echo "Backup creado"
+	else
+		echo "Backup ya creado"
+	fi		
+
+
 #Crear Carpeta de Actividad
 mkdir $foo
+
 echo "Actividad nueva creada."
 
 #Copiar data a la carpeta creada
@@ -67,4 +81,7 @@ fi
 	echo "Usuario: badges-UCN"
 	echo "Password: socialucn1"
 	git push origin master -f
+
+	#rm /home/pirate/badges_UCN/openbadge-hub-py/data/proximity_data.txt
+	#rm /home/pirate/badges_UCN/openbadge-hub-py/data/audio_data.txt
 
