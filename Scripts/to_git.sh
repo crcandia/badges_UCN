@@ -2,37 +2,36 @@
 
 cd /home/pirate/badges_UCN/badges_UCN
 
-numero=TRUE
+numero=true
 
-while [ $numero ]
+while [ "$numero" = true ]
 do
     #Validar si se inserto un numero o no
 	
 	echo "Escribe la fecha de la actividad: yyyy-mm-dd";
-	read number
+	read fecha
 	
 	#Probar si existe la actividad
 	foo="actividad_"
-	foo+=$number
+	foo+="$fecha"
 
-	if [ -d /$foo/ ];
+	if [ -d "$foo" ];
 	then
 		echo "La actividad ya existe, por favor escribe una nueva fecha."
 	else
-		numero=FALSE
+		numero=false
 	fi		
-		
-     #echo -e "Acción $i ejecutada.\n"
-     #let i=$i+1
 done
 #Crear Carpeta de Actividad
 mkdir $foo
 echo "Actividad nueva creada."
 
 #Copiar data a la carpeta creada
+cd $foo
 cp /home/pirate/badges_UCN/openbadge-hub-py/data/proximity_data.txt proximity_data.txt
 cp /home/pirate/badges_UCN/openbadge-hub-py/data/audio_data.txt audio_data.txt
 
+cd ..
 
 # UpToGit 0.1
 # Actualiza facilmente tu repositorio Git
@@ -50,21 +49,10 @@ if [ ! -d '.git' ]; then
 fi
 
 # Ahora comprobamos si se le paso algun parametro
-if [ $# == 0 ]; then
-	echo "UpToGit: ¡Error! No se le a pasado ningún parámetro"
-	echo "uptogit fichero1 fichero2 ... ficheroN"
-	exit -1
-else
-	# Recorremos los parametros para comprobar si son ficheros o directorios
-	for file in $*; do
-		if [ ! -e $file ]; then
-			echo "UpToGit: El archivo o directorio $file no existe"
-			exit -1
-		fi
-	done
-	
+
+
 	# Si llegamos hasta aquí, indicamos a Git los archivos a subir
-	git add $*
+	git add .
 	
 	# Esto nos pedira el mensaje del commit
 	echo "Introduce un mensaje de comentario:"
@@ -80,4 +68,3 @@ else
 	echo "Password: socialucn1"
 	git push origin master -f
 
-fi
